@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>《闭店夜逃》玩家攻略</title>
+<style>
+:root{
+  --paper:#e8dfc9;
+  --paper2:#d8cdb3;
+  --ink:#242018;
+  --muted:#6d6250;
+  --red:#7a2e25;
+  --line:#8f8068;
+  --dark:#24231f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 18% 9%,rgba(255,255,255,.16),transparent 22%),
+    repeating-linear-gradient(0deg,rgba(30,25,18,.028) 0 1px,transparent 1px 4px),
+    #3a3832;
+  font-family:"Noto Serif SC","Songti SC","SimSun",serif;
+  line-height:1.82;
+}
+.wrap{
+  width:min(980px,calc(100% - 28px));
+  margin:32px auto 64px;
+  background:
+    linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05)),
+    var(--paper);
+  box-shadow:0 18px 60px rgba(0,0,0,.42);
+  border:1px solid #181713;
+  position:relative;
+}
+.wrap:before{
+  content:"";
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 7px,rgba(78,63,41,.018) 7px 8px);
+  mix-blend-mode:multiply;
+}
+.header{
+  padding:46px 54px 30px;
+  border-bottom:2px solid var(--ink);
+  position:relative;
+}
+.kicker{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-size:12px;letter-spacing:.15em;color:var(--muted)
+}
+h1{
+  margin:.25em 0 .2em;
+  font-size:clamp(34px,6vw,65px);
+  line-height:1.05;
+  font-weight:800;
+  letter-spacing:-.04em;
+}
+.subtitle{
+  max-width:720px;
+  margin:18px 0 0;
+  font-size:15px;
+}
+.stamp{
+  position:absolute;right:50px;top:44px;
+  border:3px double var(--red);
+  color:var(--red);
+  padding:6px 12px;
+  transform:rotate(5deg);
+  font:700 12px/1.3 ui-monospace,Consolas,monospace;
+  letter-spacing:.08em;
+}
+nav{
+  padding:18px 54px;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+}
+nav a{color:var(--ink);margin-right:16px;text-decoration:none;border-bottom:1px dotted var(--line)}
+main{padding:34px 54px 56px}
+section{margin:0 0 46px}
+h2{
+  margin:0 0 16px;
+  font-size:25px;
+  line-height:1.25;
+  border-bottom:1px solid var(--ink);
+  padding-bottom:8px;
+}
+h2 span{
+  color:var(--red);
+  font:700 12px ui-monospace,Consolas,monospace;
+  margin-right:8px;
+}
+h3{font-size:18px;margin:24px 0 8px}
+p{margin:.7em 0}
+.note{
+  margin:18px 0;
+  padding:10px 0 10px 18px;
+  border-left:4px solid var(--red);
+  color:#4a4034;
+}
+.route{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  background:#2e2d29;
+  color:#efe7d4;
+  padding:15px 18px;
+  margin:16px 0 24px;
+  white-space:normal;
+  border-left:5px solid #9e7a3c;
+}
+.answer{
+  display:inline-block;
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+  font-weight:800;
+  letter-spacing:.04em;
+  color:var(--red);
+  border-bottom:2px solid rgba(122,46,37,.35);
+}
+details{
+  margin:12px 0;
+  border-top:1px dashed #998b72;
+  border-bottom:1px dashed #998b72;
+  padding:10px 0;
+}
+summary{cursor:pointer;font-weight:700}
+details[open] summary{color:var(--red)}
+table{
+  width:100%;border-collapse:collapse;margin:14px 0 22px;
+  font-size:14px;
+}
+th,td{border-bottom:1px solid #a99b81;padding:8px 7px;text-align:left;vertical-align:top}
+th{font-weight:800;width:27%}
+.mini{
+  font-size:13px;color:var(--muted)
+}
+.timeline{
+  border-left:2px solid var(--ink);
+  margin:16px 0 20px 6px;
+  padding-left:18px;
+}
+.timeline p{position:relative;margin:8px 0}
+.timeline p:before{
+  content:"";
+  width:8px;height:8px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--ink);
+  position:absolute;left:-24px;top:.63em;
+}
+.hand{
+  margin:20px 0;
+  padding:15px 20px;
+  transform:rotate(-.35deg);
+  background:#f0e8d4;
+  border:1px solid #8d7e64;
+  box-shadow:4px 5px 0 rgba(64,54,40,.08);
+}
+.warn{color:var(--red);font-weight:800}
+hr{border:0;border-top:1px solid #94866d;margin:30px 0}
+footer{
+  border-top:2px solid var(--ink);
+  padding:22px 54px 30px;
+  color:var(--muted);font-size:12px
+}
+@media(max-width:700px){
+  .wrap{width:100%;margin:0;border:0}
+  .header,main,nav,footer{padding-left:22px;padding-right:22px}
+  .stamp{position:static;display:inline-block;margin-top:20px}
+  h1{font-size:42px}
+  table{font-size:13px}
+}
+@media print{
+  body{background:white}
+  .wrap{box-shadow:none;width:100%;margin:0;border:0}
+  nav{display:none}
+  details{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="header">
+  <div class="kicker">PLAYER NOTE / SPOILER WALKTHROUGH / BUILD 2026-09-18</div>
+  <h1>《闭店夜逃》<br>玩家攻略</h1>
+  <p class="subtitle">不是“点哪里就完事”的步骤表。我按玩家实际调查顺序把关键证据、账号来源、监控顺序和事故时间线写在一起。实在卡住再展开答案。</p>
+  <div class="stamp">严重剧透<br>通关后再看更合适</div>
+</header>
+
+<nav>
+  <a href="#start">开局</a>
+  <a href="#participant">参与者记录</a>
+  <a href="#staff">员工系统</a>
+  <a href="#cctv">监控</a>
+  <a href="#archive">事故卷宗</a>
+  <a href="#timeline">时间轴</a>
+  <a href="#ending">结局</a>
+</nav>
+
+<main>
+<section id="start">
+<h2><span>01</span>先别急着找“密码入口”</h2>
+<p>开局是周凯相关的本机页面。先把桌面上能点开的内容都看一遍：浏览器、信息、照片、电话、网页缓存。这里真正重要的不是某一条孤立信息，而是先确认三件事：</p>
+<div class="timeline">
+  <p>周凯 9 月 17 日晚上参加了“闭店夜逃”第 29 场。</p>
+  <p>标准场已经结算，但他之后没有正常离场记录。</p>
+  <p>公开成绩页只有 12 条记录，和活动页写的 13 个标准名额对不上。</p>
+</div>
+<p>浏览器进入活动官网后，优先看<strong>本期成绩</strong>和<strong>参与者记录查询</strong>。第 29 场公开页能看到 01—12 号参与者，但没有周凯；与此同时，周凯本人的本机信息和报名痕迹都说明他确实到场。</p>
+<div class="note">这里开始就要把“公开页面”和“个人记录”分开看。作品故意让公开成绩显得像已经正常结算，但真正异常的是：周凯标准场完成了，后面又被拉去做了“追加拍摄”。</div>
+</section>
+
+<section id="participant">
+<h2><span>02</span>参与者记录查询</h2>
+<p>参与者入口要填两个东西：报名手机号后四位、出生月日。手机号后四位可以从本机/报名相关记录找到；出生月日来自周凯个人资料线索。</p>
+<details>
+  <summary>直接看登录答案</summary>
+  <table>
+    <tr><th>手机号后四位</th><td><span class="answer">2714</span></td></tr>
+    <tr><th>出生月日</th><td><span class="answer">0517</span></td></tr>
+  </table>
+</details>
+
+<p>登录后重点看“周凯 / 第29场”页面：</p>
+<ul>
+  <li>标准路线：<strong>已完成</strong>，时间 01:58:22；</li>
+  <li>奖金：800 元已结算；</li>
+  <li>离场记录：<strong>未写入</strong>；</li>
+  <li>现场附注：<strong>追加拍摄候选 / 现场确认</strong>。</li>
+</ul>
+<p>这一步说明周凯不是在标准游戏里失踪的。标准路线结束后，他又被工作人员单独留下。</p>
+
+<div class="hand">
+<b>我当时记的一句：</b><br>
+“如果 01:58 已经拿到 800 元，那后面发生的就不是公开成绩里的标准场内容。继续查工作人员自己的系统。”
+</div>
+</section>
+
+<section id="staff">
+<h2><span>03</span>历史培训程序 → 员工值班系统</h2>
+<p>继续从参与者帮助目录/遗留培训内容进入“闭店巡检 2.3.1”历史镜像。前三段是场务培训示意，最后还有设备间整理模拟。完成培训后会直接给出员工后台需要的关键字段：</p>
+<table>
+<tr><th>巡检设备</th><td><span class="answer">B17</span></td></tr>
+<tr><th>末班值班工号</th><td><span class="answer">042</span></td></tr>
+<tr><th>值班码规则</th><td>活动日期 <span class="answer">MMDD</span></td></tr>
+</table>
+
+<p>第 29 场活动日期是 9 月 17 日，所以员工登录：</p>
+<details open>
+<summary>员工后台答案</summary>
+<table>
+<tr><th>工号</th><td><span class="answer">042</span></td></tr>
+<tr><th>当日值班码</th><td><span class="answer">0917</span></td></tr>
+</table>
+</details>
+
+<p>登录后先别只盯着“追加拍摄”，把值班台和设备工单一起看。最重要的两条：</p>
+<div class="timeline">
+  <p><strong>02:07</strong>　追加拍摄开始，房间链路：B12 → B15 → B17。</p>
+  <p><strong>B17</strong>　电控插销复位偶发失败；设备组明确写了“断电后可手开；不建议排单人项目”，但当班处理仍是“继续使用”。</p>
+</div>
+<p>员工群里还能看到 B17 控制盒一直待审批，以及 SM-3 烟雾机电源问题。这些信息后面都会和事故时间线对应上。</p>
+</section>
+
+<section id="cctv">
+<h2><span>04</span>监控事件链：最容易卡的一段</h2>
+<p>监控页有 12 路缓存。这里<strong>不要按画面上显示的原始时间从小到大排序</strong>，因为页面已经告诉你：不同机位的时钟有漂移。正确做法是先看每个机位“发生了什么”，按因果顺序拼周凯的追加拍摄路线。</p>
+
+<table>
+<tr><th>CAM-04</th><td>标准场结束后，周凯还坐在出口长椅看手机。</td></tr>
+<tr><th>CAM-09</th><td>工作人员回来询问“加时场/追加拍摄”。</td></tr>
+<tr><th>CAM-12</th><td>周凯经服务门进入 B 区。</td></tr>
+<tr><th>CAM-10</th><td>B15 房间结束。</td></tr>
+<tr><th>CAM-07</th><td>周凯进入 B17，工作人员关门。</td></tr>
+<tr><th>CAM-03</th><td>B17 内部按钮触发退出请求。</td></tr>
+</table>
+
+<details open>
+<summary>事件链最终答案</summary>
+<div class="route">04 → 09 → 12 → 10 → 07 → 03</div>
+</details>
+
+<p>为什么不是“04、06、07、09、10、12”那类顺序？因为 06 是普通的 B 区备用通道，没有直接记录周凯；真正构成完整链条的是“等候 → 被邀请 → 进入 B 区 → B15 结束 → 进入 B17 → 申请退出”。</p>
+
+<div class="note">事件链通过后会开放“校准机位时钟”。这一段的目的不是再找一组人，而是把不同设备的原始时钟统一到同一个基准，再和 B 区路线一起完成事故归档前置条件。</div>
+</section>
+
+<section>
+<h2><span>05</span>时钟校准与 B 区路线</h2>
+<p>这两页属于进入事故卷宗前的“双核验”。攻略思路很简单：</p>
+<ol>
+  <li>时钟页：找同一事件在不同设备上的对应记录，用门控主机/NTP 基准修正偏移；</li>
+  <li>路线页：用员工记录里已经给出的房间链路 <span class="answer">B12 → B15 → B17</span> 去核对周凯的追加拍摄路径。</li>
+</ol>
+<p class="mini">如果你已经把监控事件链做对，却仍进不了事故归档，通常不是密码错，而是这两个前置核验有一个还没被系统记成完成。</p>
+</section>
+
+<section id="archive">
+<h2><span>06</span>事故归档登录</h2>
+<p>前面完成“时钟校准 + B 区路线”以后，事故归档登录才会真正放行。</p>
+<details open>
+<summary>事故卷宗入口答案</summary>
+<table>
+<tr><th>事件号</th><td><span class="answer">EVT-9176</span></td></tr>
+<tr><th>房间号</th><td><span class="answer">B17</span></td></tr>
+</table>
+</details>
+
+<p>正式简报写的是：</p>
+<div class="timeline">
+  <p>03:01　值班人员发现 B17 门禁异常；</p>
+  <p>03:12　启动外部医疗救援并联系消防；</p>
+  <p>03:29　房门打开；</p>
+</div>
+<p>但卷宗首页直接提示：<strong>有早于 03:01 的原始记录。</strong>所以接下来别被“正式简报”牵着走，要把联系人访问、值班群、CAM-03、附件和工作表放在一起重建时间线。</p>
+</section>
+
+<section id="timeline">
+<h2><span>07</span>事故时间轴工作表</h2>
+<p>时间轴题不是单纯按一个页面里的时间抄，而是把不同来源合并。系统内部要求的事件次序是：</p>
+
+<details open>
+<summary>时间轴正确顺序</summary>
+<div class="route">退出请求 → 门锁异常/插销复位失败 → 联系/尝试处理 → 烟雾相关异常 → 呼叫外部救援 → 开门</div>
+</details>
+
+<p>在核对“正式简报中的首次发现时间”时，要选：</p>
+<p><span class="answer">异常发生在 03:01 之前</span></p>
+
+<p>关键依据是：<strong>02:41</strong> 已经有 B17 的退出请求，之后又出现电控插销复位失败。也就是说，03:01 并不是异常真正开始的时间，只是正式简报写下的“发现时间”。</p>
+
+<div class="hand">
+<b>这一段的逻辑：</b><br>
+不是“03:01 之后救得太慢”这么简单，而是“玩家已经退出 → 门没开 → 设备问题存在 → 原始记录比正式简报更早”。事故责任链就在这里被拼完整。
+</div>
+</section>
+
+<section id="ending">
+<h2><span>08</span>最终附件与结局</h2>
+<p>完成事故卷宗后会进入医疗与现场附件。这里没有新的大谜题，主要是确认最后发生了什么：</p>
+<div class="timeline">
+  <p>02:47:31　周凯已经明确说“我按退出了”，并连续敲门。</p>
+  <p>02:54:02　开始明显咳嗽，并指出现场气味不对。</p>
+  <p>03:04:11　还能断续说话，之后没有稳定人声。</p>
+  <p>03:48　送达急诊。</p>
+  <p>04:07　确认死亡。</p>
+</div>
+<p>卷宗读完后点“关闭卷宗，返回本机”，会回到周凯的聊天界面。最后一条仍然停在昨晚的对话：</p>
+<p class="note">“今晚那个密逃我去试一下，估计得挺晚。你明早不是还要早起吗，别等我。”</p>
+<p>点“结束调查”即可进入最终感谢页。</p>
+</section>
+
+<section>
+<h2><span>附</span>一眼通关表</h2>
+<table>
+<tr><th>参与者手机号后四位</th><td><span class="answer">2714</span></td></tr>
+<tr><th>出生月日</th><td><span class="answer">0517</span></td></tr>
+<tr><th>员工工号</th><td><span class="answer">042</span></td></tr>
+<tr><th>员工值班码</th><td><span class="answer">0917</span></td></tr>
+<tr><th>关键房间</th><td><span class="answer">B17</span></td></tr>
+<tr><th>追加拍摄房间链</th><td><span class="answer">B12 → B15 → B17</span></td></tr>
+<tr><th>监控事件链</th><td><span class="answer">04 → 09 → 12 → 10 → 07 → 03</span></td></tr>
+<tr><th>事故事件号</th><td><span class="answer">EVT-9176</span></td></tr>
+<tr><th>事故房间</th><td><span class="answer">B17</span></td></tr>
+<tr><th>时间轴判断</th><td><span class="answer">异常早于 03:01 已发生</span></td></tr>
+</table>
+<p class="warn">卡住时最先检查：监控顺序有没有按“事件”而不是“原始时间”排；时钟校准和 B 区路线两个前置页是否都已经完成。</p>
+</section>
+</main>
+
+<footer>
+《闭店夜逃》玩家攻略 / 非官方站内页面复刻。攻略按当前仓库实际公开流程整理，只写调查过程中会用到的关键内容。
+</footer>
+</div>
+</body>
+</html>
